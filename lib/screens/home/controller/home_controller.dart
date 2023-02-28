@@ -1,8 +1,15 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:peepapp/common/api_service.dart';
 import 'package:peepapp/screens/account/view/account.dart';
 import 'package:peepapp/screens/chats/view/chats_screen.dart';
+import 'package:peepapp/screens/login/model/user_model.dart';
 import 'package:peepapp/screens/people/view/people_screen.dart';
 import 'package:peepapp/screens/shouts/view/shout_screen.dart';
+import 'package:peepapp/screens/splash/controller/login_controller.dart';
 
 class HomeController extends ChangeNotifier {
   final List<Map<String, dynamic>> _sideTabs = [
@@ -63,5 +70,30 @@ class HomeController extends ChangeNotifier {
           ),
         );
     }
+  }
+
+  late UserDataModel _userDetails;
+  bool loadingUserDetails = true;
+
+  getUserDetails() async {
+    loadingUserDetails = true;
+    notifyListeners();
+    final decodedToken = JwtDecoder.decode(LoginController.userToken);
+    log(decodedToken.toString());
+    final result = await ApiService.apiDelegate(
+      reqMethod: "GET",
+      endPoint: "account/v1/users/${decodedToken['sub']}",
+    ).then((value) {
+      loadingUserDetails = false;
+      notifyListeners();
+      log(value.toString());
+      _userDetails = UserDataModel.fromMap(value.data);
+      _userDetails.token = LoginController.userToken;
+      log(_userDetails.name.toString());
+      return value;
+    }).onError<DioError>((error, stackTrace) {
+      return error;
+    });
+    // _userDetails = UserModel();
   }
 }
