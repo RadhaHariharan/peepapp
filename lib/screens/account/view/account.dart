@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peepapp/common/extensions.dart';
 import 'package:peepapp/screens/account/controller/account_controller.dart';
+import 'package:peepapp/screens/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accountCtrlWatch = context.watch<AccountController>();
+    final homeCtrlWatch = context.watch<HomeController>();
     return Container(
       child: ListView(
         children: [
@@ -79,7 +80,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(height: 0.5.hp),
           Center(
             child: Text(
-              accountCtrlWatch.user.name,
+              homeCtrlWatch.userDetails.name,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 6.0.sp,
@@ -88,7 +89,7 @@ class AccountScreen extends StatelessWidget {
           ),
           Center(
             child: Text(
-              accountCtrlWatch.user.whatIDo,
+              homeCtrlWatch.userDetails.whatIDo,
               style: TextStyle(
                 fontSize: 3.0.sp,
               ),
@@ -111,7 +112,7 @@ class AccountScreen extends StatelessWidget {
                     height: 2.25.hp,
                     child: TextFormField(
                       controller: TextEditingController(
-                        text: accountCtrlWatch.user.name,
+                        text: homeCtrlWatch.userDetails.name,
                       ),
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
@@ -139,7 +140,7 @@ class AccountScreen extends StatelessWidget {
                     child: TextFormField(
                       controller: TextEditingController(
                         text:
-                            "+${accountCtrlWatch.user.code} ${accountCtrlWatch.user.number}",
+                            "+${homeCtrlWatch.userDetails.code} ${homeCtrlWatch.userDetails.phone}",
                       ),
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
@@ -166,7 +167,7 @@ class AccountScreen extends StatelessWidget {
                     height: 2.25.hp,
                     child: TextFormField(
                       controller: TextEditingController(
-                        text: accountCtrlWatch.user.gender,
+                        text: homeCtrlWatch.userDetails.gender,
                       ),
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
@@ -194,7 +195,7 @@ class AccountScreen extends StatelessWidget {
                     height: 2.25.hp,
                     child: TextFormField(
                       controller: TextEditingController(
-                        text: accountCtrlWatch.user.whatIDo,
+                        text: homeCtrlWatch.userDetails.whatIDo,
                       ),
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
@@ -221,7 +222,7 @@ class AccountScreen extends StatelessWidget {
                     height: 2.25.hp,
                     child: TextFormField(
                       controller: TextEditingController(
-                        text: accountCtrlWatch.user.worksAt,
+                        text: homeCtrlWatch.userDetails.worksAt,
                       ),
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
@@ -248,7 +249,7 @@ class AccountScreen extends StatelessWidget {
                     height: 2.25.hp,
                     child: TextFormField(
                       controller: TextEditingController(
-                        text: accountCtrlWatch.user.status,
+                        text: homeCtrlWatch.userDetails.status,
                       ),
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
@@ -292,7 +293,7 @@ class AccountScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 0.25.hp),
                         Row(
-                          children: accountCtrlWatch.user.intrests
+                          children: homeCtrlWatch.userDetails.intrests
                               .map(
                                 (e) => Container(
                                   margin: EdgeInsets.only(right: 1.0.wp),

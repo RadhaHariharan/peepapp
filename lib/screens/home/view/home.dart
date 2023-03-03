@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:peepapp/common/extensions.dart';
-import 'package:peepapp/screens/account/controller/account_controller.dart';
 import 'package:peepapp/screens/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +11,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeCtrlRead = context.read<HomeController>();
     final homeCtrlWatch = context.watch<HomeController>();
-    final accountCtrlWatch = context.watch<AccountController>();
     return Scaffold(
       appBar: AppBar(
         title: Text(homeCtrlWatch.currentScreen['title']),
@@ -64,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  accountCtrlWatch.user.name,
+                                  homeCtrlWatch.userDetails.name,
                                   style: TextStyle(
                                     fontSize: 4.0.sp,
                                     fontWeight: FontWeight.bold,
@@ -72,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  accountCtrlWatch.user.email,
+                                  homeCtrlWatch.userDetails.email,
                                   style: TextStyle(
                                     fontSize: 3.5.sp,
                                     color: Colors.white,

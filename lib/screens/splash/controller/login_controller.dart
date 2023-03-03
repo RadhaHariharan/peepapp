@@ -57,6 +57,9 @@ class LoginController extends ChangeNotifier {
       notifyListeners();
       return value;
     }).onError<DioError>((error, stackTrace) {
+      loadingOtpSend = false;
+      _isOtpSent = false;
+      notifyListeners();
       return error;
     });
     return result;
@@ -78,6 +81,8 @@ class LoginController extends ChangeNotifier {
       userToken = value.data['token'];
       return value;
     }).onError<DioError>((error, stackTrace) {
+      loadingLogin = false;
+      notifyListeners();
       return error;
     });
     return result;

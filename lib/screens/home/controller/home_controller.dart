@@ -12,6 +12,7 @@ import 'package:peepapp/screens/shouts/view/shout_screen.dart';
 import 'package:peepapp/screens/splash/controller/login_controller.dart';
 
 class HomeController extends ChangeNotifier {
+  static UserDataModel? userData;
   final List<Map<String, dynamic>> _sideTabs = [
     {
       'title': 'People',
@@ -73,6 +74,7 @@ class HomeController extends ChangeNotifier {
   }
 
   late UserDataModel _userDetails;
+  UserDataModel get userDetails => _userDetails;
   bool loadingUserDetails = true;
 
   getUserDetails() async {
@@ -84,16 +86,16 @@ class HomeController extends ChangeNotifier {
       reqMethod: "GET",
       endPoint: "account/v1/users/${decodedToken['sub']}",
     ).then((value) {
-      loadingUserDetails = false;
-      notifyListeners();
-      log(value.toString());
       _userDetails = UserDataModel.fromMap(value.data);
       _userDetails.token = LoginController.userToken;
-      log(_userDetails.name.toString());
+      loadingUserDetails = false;
+      userData = _userDetails;
+      notifyListeners();
       return value;
     }).onError<DioError>((error, stackTrace) {
       return error;
     });
+    return result;
     // _userDetails = UserModel();
   }
 }

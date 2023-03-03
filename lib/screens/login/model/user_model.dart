@@ -8,6 +8,14 @@ class UserDataModel {
   LocationModel location;
   bool newUser;
   String token;
+  String whatIDo;
+  int code;
+  String gender;
+  String worksAt;
+  String status;
+  String img;
+  String email;
+  List<String> intrests;
 
   UserDataModel({
     required this.id,
@@ -19,6 +27,14 @@ class UserDataModel {
     required this.location,
     required this.newUser,
     required this.token,
+    required this.code,
+    required this.email,
+    required this.gender,
+    required this.img,
+    required this.intrests,
+    required this.status,
+    required this.whatIDo,
+    required this.worksAt,
   });
 
   static fromMap(Map<String, dynamic> data) => UserDataModel(
@@ -35,6 +51,14 @@ class UserDataModel {
           lng: data['location']['lng'],
           updatedAt: data['location']['updatedAt'],
         ),
+        code: data['code'] ?? 91,
+        email: data['email'] ?? "test@gmail.com",
+        gender: data['gender'] ?? 'Male',
+        img: data['img'] ?? "",
+        intrests: data['intrests'] ?? ["Chess", "Movies"],
+        status: data['status'] ?? 'Married',
+        whatIDo: data['whatIDo'] ?? "Software Developer",
+        worksAt: data['worksAt'] ?? "ABC Company",
       );
 }
 

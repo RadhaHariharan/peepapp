@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:peepapp/common/extensions.dart';
@@ -134,12 +136,14 @@ class OTPWidget extends StatelessWidget {
                         );
                       }
                     } else if (result.statusCode == 200) {
+                      log("Line 139");
+                      await homeCtrlRead.getUserDetails();
+                      log("Line 141");
                       // ignore: use_build_context_synchronously
                       Navigator.pushReplacementNamed(
                         context,
                         HomeScreen.routeName,
                       );
-                      homeCtrlRead.getUserDetails();
                     }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(

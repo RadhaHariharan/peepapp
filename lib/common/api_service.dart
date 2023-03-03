@@ -13,6 +13,9 @@ class CustomInterceptors extends Interceptor {
       HttpHeaders.contentTypeHeader: "application/json",
       HttpHeaders.authorizationHeader: "Bearer ${LoginController.userToken}",
     };
+    if (options.extra['isGraphSql']) {
+      options.headers['content-type'] = "application/graphql";
+    }
     super.onRequest(options, handler);
   }
 
@@ -48,18 +51,25 @@ class ApiService {
     required String endPoint,
     dynamic queryStringParams,
     dynamic payload,
+    dynamic isGraphSql = false,
   }) {
-    log(jsonEncode(payload));
+    Options customOptions = Options(
+      extra: {
+        'isGraphSql': isGraphSql,
+      },
+    );
     switch (reqMethod) {
       case "POST":
         return _dio.post(
           url + endPoint,
-          data: jsonEncode(payload),
+          data: isGraphSql ? payload : jsonEncode(payload),
+          options: customOptions,
         );
       case "GET":
         return _dio.get(
           url + endPoint,
           data: jsonEncode(payload),
+          options: customOptions,
         );
       default:
         return Future.value();
