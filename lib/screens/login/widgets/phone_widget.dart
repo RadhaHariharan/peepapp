@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:peepapp/common/extensions.dart';
 import 'package:peepapp/screens/splash/controller/login_controller.dart';
@@ -101,6 +103,7 @@ class PhoneWidget extends StatelessWidget {
             if (!loginCtrlWatch.loadingOtpSend) {
               if (loginCtrlWatch.phoneController.text.length == 10) {
                 final result = await loginCtrlWatch.sendOtp();
+                log("Line 106 : ${result.runtimeType}");
                 if (result.runtimeType.toString() == "DioError") {
                   if (result.response.statusCode == 400) {
                     // ignore: use_build_context_synchronously

@@ -42,10 +42,10 @@ class LoginController extends ChangeNotifier {
     return otp;
   }
 
-  Future<dynamic> sendOtp() {
+  Future<dynamic> sendOtp() async {
     loadingOtpSend = true;
     notifyListeners();
-    final result = ApiService.apiDelegate(
+    final result = await ApiService.apiDelegate(
       reqMethod: "POST",
       endPoint: "auth/v1/login/otp",
       payload: {

@@ -52,7 +52,7 @@ class ApiService {
     dynamic queryStringParams,
     dynamic payload,
     dynamic isGraphSql = false,
-  }) {
+  }) async {
     Options customOptions = Options(
       extra: {
         'isGraphSql': isGraphSql,
@@ -60,13 +60,13 @@ class ApiService {
     );
     switch (reqMethod) {
       case "POST":
-        return _dio.post(
+        return await _dio.post(
           url + endPoint,
           data: isGraphSql ? payload : jsonEncode(payload),
           options: customOptions,
         );
       case "GET":
-        return _dio.get(
+        return await _dio.get(
           url + endPoint,
           data: jsonEncode(payload),
           options: customOptions,
