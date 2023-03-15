@@ -5,7 +5,7 @@ class UserDataModel {
   String phone;
   String createdAt;
   String updatedAt;
-  LocationModel location;
+  LocationModel? location;
   bool newUser;
   String token;
   String whatIDo;
@@ -24,7 +24,7 @@ class UserDataModel {
     required this.phone,
     required this.createdAt,
     required this.updatedAt,
-    required this.location,
+    this.location,
     required this.newUser,
     required this.token,
     required this.code,
@@ -40,17 +40,19 @@ class UserDataModel {
   static fromMap(Map<String, dynamic> data) => UserDataModel(
         id: data['id'],
         createdAt: data['createdAt'],
-        name: data['name'],
+        name: data['name'] ?? "",
         phone: data['phone'],
-        newUser: data['new'],
+        newUser: data['new'] ?? "",
         token: "",
         updatedAt: data['updatedAt'],
         userId: data['userId'],
-        location: LocationModel(
-          lat: data['location']['lat'],
-          lng: data['location']['lng'],
-          updatedAt: data['location']['updatedAt'],
-        ),
+        location: data['location'] != null
+            ? LocationModel(
+                lat: data['location']['lat'],
+                lng: data['location']['lng'],
+                updatedAt: data['location']['updatedAt'],
+              )
+            : null,
         code: data['code'] ?? 91,
         email: data['email'] ?? "test@gmail.com",
         gender: data['gender'] ?? 'Male',

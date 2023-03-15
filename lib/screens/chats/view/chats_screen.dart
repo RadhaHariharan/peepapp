@@ -51,7 +51,7 @@ class ChatsScreen extends StatelessWidget {
                           color: Colors.blue,
                           image: DecorationImage(
                             image: AssetImage(
-                              "assets/bg.jpg",
+                              "assets/profilepic.jpeg",
                             ),
                             fit: BoxFit.fill,
                           ),

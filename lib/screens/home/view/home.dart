@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                     color: const Color(0xffffffff),
                     height: 11.0.hp,
                     child: Image.asset(
-                      'assets/bg.jpg',
+                      'assets/profilepic.jpeg',
                       fit: BoxFit.fill,
                     ),
                   ),

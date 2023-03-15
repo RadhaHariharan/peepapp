@@ -7,15 +7,24 @@ class PeopleModel {
   String workAt;
   String status;
   String intrests;
+  String id;
+  String userId;
 
-  PeopleModel({
-    required this.img,
-    required this.name,
-    required this.whatIDo,
-    required this.distance,
-    required this.location,
-    required this.workAt,
-    required this.status,
-    required this.intrests,
-  });
+  PeopleModel(
+      {this.img = '',
+      required this.name,
+      this.whatIDo = 'Staff Engineer',
+      this.distance = 0.1,
+      this.location = 'Hyderabad',
+      this.workAt = 'VComply',
+      this.status = 'Active',
+      this.intrests = 'Development',
+      required this.id,
+      required this.userId});
+
+  static fromMap(Map<String, dynamic> data) => PeopleModel(
+        id: data['id'],
+        name: data['name'] ?? "",
+        userId: data['userId'],
+      );
 }

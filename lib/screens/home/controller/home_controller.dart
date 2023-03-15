@@ -61,7 +61,7 @@ class HomeController extends ChangeNotifier {
       case 'shout':
         return ShoutScreen();
       case 'people':
-        return const PeopleScreen();
+        return PeopleScreen();
       case 'account settings':
         return const AccountScreen();
       default:

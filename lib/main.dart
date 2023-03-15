@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
           ChatsScreen.routeName: (context) => ChatsScreen(),
           ChatScreen.routeName: (context) => ChatScreen(),
           ShoutScreen.routeName: (context) => ShoutScreen(),
-          PeopleScreen.routeName: (context) => const PeopleScreen(),
+          PeopleScreen.routeName: (context) => PeopleScreen(),
           AccountScreen.routeName: (context) => const AccountScreen(),
           LoginScreen.routeName: (context) => const LoginScreen(),
           PeopleDetailsScreen.routeName: (context) =>

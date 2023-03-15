@@ -4,13 +4,20 @@ import 'package:peepapp/screens/people/controller/people_controller.dart';
 import 'package:peepapp/screens/people/view/people_detail.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class PeopleScreen extends StatelessWidget {
   static String routeName = "/peopleScreen";
-  const PeopleScreen({super.key});
+  PeopleScreen({super.key});
+  bool loadPeopleList = true;
 
   @override
   Widget build(BuildContext context) {
     final peopleCtrlWatch = context.watch<PeopleController>();
+    final peopleCtrlRead = context.read<PeopleController>();
+    if (loadPeopleList) {
+      peopleCtrlRead.getPeopleList();
+      loadPeopleList = false;
+    }
     return Container(
       child: Column(
         children: [
@@ -63,12 +70,19 @@ class PeopleScreen extends StatelessWidget {
                         width: 5.0.wp,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
-                          image: DecorationImage(
-                            image: AssetImage(
-                              "assets/bg.jpg",
-                            ),
-                            fit: BoxFit.fill,
+                          color: Color(0xff936AB9),
+                          // image: DecorationImage(
+                          //   image: AssetImage(
+                          //     "assets/bg.jpg",
+                          //   ),
+                          //   fit: BoxFit.fill,
+                          // ),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                            size: 8.0.sp,
                           ),
                         ),
                       ),
@@ -81,7 +95,7 @@ class PeopleScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              peopleCtrlWatch.peoples[i].name.toString(),
+                              peopleCtrlWatch.peoples[i].userId.toString(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 4.25.sp,
@@ -89,7 +103,7 @@ class PeopleScreen extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              peopleCtrlWatch.peoples[i].whatIDo,
+                              peopleCtrlWatch.peoples[i].name,
                               style: TextStyle(
                                 fontSize: 3.75.sp,
                               ),
